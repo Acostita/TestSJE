@@ -50,13 +50,13 @@ namespace TestJSE
         public int IdentityCard { get; set; }
         private void button2_Click(object sender, EventArgs e)
         {
-            string query = "UPDATE Students " +
+            string query = "UPDATE Students " +  // realizamos la actualizacion de los campos segun los datos en la vista
                            "SET names = @names," +
                            "surnames = @surnames," +
                            "date_of_birth = @date_of_birth" +
                            " WHERE identity_card = @estudianteID";
 
-            DateTime.TryParse(textBox3.Text, out DateTime nuevaFechaNacimiento);
+            DateTime.TryParse(textBox3.Text, out DateTime nuevaFechaNacimiento); // transformamos a una nueva fehca de nacimiento
 
             String connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
 
@@ -65,7 +65,7 @@ namespace TestJSE
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@estudianteID", IdentityCard);
+                    cmd.Parameters.AddWithValue("@estudianteID", IdentityCard); // asignamos los valores de actualizacion
                     cmd.Parameters.AddWithValue("@names", textBox1.Text);
                     cmd.Parameters.AddWithValue("@surnames", textBox2.Text);
                     cmd.Parameters.AddWithValue("@date_of_birth", nuevaFechaNacimiento.Date);

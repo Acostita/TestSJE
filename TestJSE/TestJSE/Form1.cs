@@ -23,15 +23,15 @@ namespace TestJSE
         private void button1_Click(object sender, EventArgs e)
         {
             
-            string searchTerm = textBox1.Text.Trim();
-            string query = "SELECT s.identity_card,CONCAT(s.names,' ',s.surnames), c.name " +
-                            "FROM Students AS s INNER JOIN Schools AS c " +
-                            "ON s.id_school = c.id " +
+            string searchTerm = textBox1.Text.Trim(); // leemos el texto que queremos buscar
+            string query = "SELECT s.identity_card,CONCAT(s.names,' ',s.surnames), c.name " + // seleccionamos la lista
+                            "FROM Students AS s INNER JOIN Schools AS c " +                   // de estudiantes con sus
+                            "ON s.id_school = c.id " +                                        // respectivos nombres de colegio
                             "WHERE s.names LIKE @SearchTerm " +
                             "OR s.surnames LIKE @SearchTerm " +
                             "OR CONVERT(VARCHAR, s.date_of_birth, 103) LIKE @SearchTerm " +
                             "OR c.name LIKE @SearchTerm;";
-            DataTable dataTable = new DataTable();
+            DataTable dataTable = new DataTable();                      // creamos una tabla que se cargará al grid
 
             String connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
 
@@ -40,11 +40,11 @@ namespace TestJSE
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@SearchTerm", "%" + searchTerm + "%");
-                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd)) // ejecutamos la senetencia SQL
                     {
-                        adapter.Fill(dataTable);
+                        adapter.Fill(dataTable); // cargamos los datos a tabla
 
-                        // Bind the search results to your DataGridView
+                        // cargamos los datos de la tabla creada a nuestra grilla o grid
                         dvgStudents.DataSource = dataTable;
                     }
                 }
@@ -53,40 +53,39 @@ namespace TestJSE
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            String connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;
+            String connectionString = ConfigurationManager.ConnectionStrings["myconnection"].ConnectionString;  // nos a nuestra base de datos local
             DataTable dt = new DataTable();
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(connectionString)) // establecemos los parametros de la conexion
             {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("StudentsData", conn))
+                conn.Open(); // nos conectamos
+                using (SqlCommand cmd = new SqlCommand("StudentsData", conn)) // ejecutamos la sentencia creada en Pregunta1_TestJSE
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    dt.Load(reader);
+                    cmd.CommandType = CommandType.StoredProcedure; // definmos como un procedimiento
+                    SqlDataReader reader = cmd.ExecuteReader(); // leemos los datos
+                    dt.Load(reader); // cargamos los datos
                 }
             }
 
-            dvgStudents.DataSource = dt;
+            dvgStudents.DataSource = dt; // cargamos nuestra tabla
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
             // Asegurarse de que la celda seleccionada no sea el encabezado
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0) // vamos a querer actualizar valores de una fila
             {
                 DataGridViewRow filaSeleccionada = dvgStudents.Rows[e.RowIndex];
 
                 // Obtener el valor de la celda en la columna del ID
-                int estudianteID = Convert.ToInt32(filaSeleccionada.Cells["identity_card"].Value);
+                int estudianteID = Convert.ToInt32(filaSeleccionada.Cells["identity_card"].Value); // obtenemos el id de la fila seleccionada
 
-                Form2 f2 = new Form2(estudianteID);
+                Form2 f2 = new Form2(estudianteID); // Le pasamos el id a la nueva vista para poder buscar la información necesaria
 
-                f2.IdentityCard = estudianteID;
+                f2.IdentityCard = estudianteID;  // definimos una variable en el Form2
 
-                f2.Show();
-                // Luego, puedes utilizar estudianteID según tus necesidades
+                f2.Show(); // mostramos la ventana Form2.
             }
 
 
@@ -95,12 +94,12 @@ namespace TestJSE
 
         private void lblHelloWorld_Click(object sender, EventArgs e)
         {
-
+                
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+                
         }
 
         private void label1_Click(object sender, EventArgs e)
