@@ -130,5 +130,11 @@ namespace TestJSE
         {
 
         }
+
+        private void button1_Click_3(object sender, EventArgs e)
+        {
+            Form3 f3 = new Form3();
+            f3.Show();
+        }
     }
 }

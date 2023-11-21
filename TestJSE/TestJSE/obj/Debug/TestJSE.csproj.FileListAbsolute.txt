@@ -9,3 +9,4 @@ C:\Users\Propietario\source\repos\TestJSE\TestJSE\obj\Debug\TestJSE.csproj.CoreC
 C:\Users\Propietario\source\repos\TestJSE\TestJSE\obj\Debug\TestJSE.exe
 C:\Users\Propietario\source\repos\TestJSE\TestJSE\obj\Debug\TestJSE.pdb
 C:\Users\Propietario\source\repos\TestJSE\TestJSE\obj\Debug\TestJSE.Form2.resources
+C:\Users\Propietario\source\repos\TestJSE\TestJSE\obj\Debug\TestJSE.Form3.resources
