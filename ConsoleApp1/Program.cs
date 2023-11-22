@@ -76,8 +76,7 @@ namespace ConsoleApp1
 
                     // Escribimos el correo
                     writer.WriteLine($"El correo con el mayor id es: {correo}");
-
-                    Console.WriteLine("Proceso completado. Resultados guardados en 'customer_summary.txt'.");
+                    // Prueba de git
                 }
             }
         }
